@@ -1,0 +1,13 @@
+.adversario {
+    width: 150px;
+    height: 150px;
+    background: url('../../img/geometry-dash-balls-png-download-geometry-dash-icons\ \(2\).png');
+    background-size: 90%;
+    background-repeat: no-repeat;
+    position: absolute;
+    right: -150px;
+    top: 50%;
+    z-index: 10;
+    transform: rotateY(180deg);
+    transition: all 2s linear;
+}

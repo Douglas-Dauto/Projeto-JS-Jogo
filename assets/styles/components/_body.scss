@@ -1,0 +1,15 @@
+body {
+    width: 100%;
+    min-height: 100vh;
+    background-image: linear-gradient(#2b1055, #7597de);
+    position: relative;
+    overflow: hidden;
+
+    &::-webkit-scrollbar {
+        width: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #2b1055;
+    }
+}

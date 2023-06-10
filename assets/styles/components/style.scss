@@ -1,0 +1,30 @@
+@import '../abstract/base';
+@import 'body';
+@import 'image';
+@import 'moon';
+@import 'personagem';
+@import 'adversario';
+@import 'stars';
+@import 'menu';
+
+/* @keyframes personagem {
+    from {
+        transform: rotate(25deg) translateY(50vh);
+    }
+}
+
+body:active .personagem {
+    animation: personagem2 2s both alternate-reverse linear;
+}
+
+@keyframes personagem2 {
+    from {
+        transform: rotate(-25deg) translateY(-50vh);
+    }
+} 
+
+script {
+    position: absolute;
+    width: 0;
+    opacity: 0;
+} */

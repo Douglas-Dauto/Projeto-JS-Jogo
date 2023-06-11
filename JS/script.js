@@ -46,4 +46,15 @@ function jogo() {
             qtdAdiversarios++;
         }
     }
+
+    setInterval(() => {
+        if(x) {
+            gameOver();
+        }
+    }, 500);
+
+    function gameOver() {
+        menu.innerHTML = 'Fim de jogo!';
+        move = true;
+    }
 }

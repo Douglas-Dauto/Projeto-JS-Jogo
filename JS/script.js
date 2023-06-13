@@ -11,20 +11,22 @@ function jogo() {
     menu.innerHTML = '<p>Clique para iniciar!</p>';
 
     setInterval(() => {
-        if(move === false) { 
+        if(move === false && personagem.getBoundingClientRect().top < window.innerHeight) { 
             gerarAdversario(qtdAdiversarios)
         }}, 5000);
     
     corpo.addEventListener('mousedown', () => {
-        menu.innerHTML = '';
+        if(personagem.getBoundingClientRect().top < window.innerHeight) {
+            menu.innerHTML = '';
 
-        if (move) {
-            lua.style.transform = 'translateX(-100vw)'
-            gerarAdversario(qtdAdiversarios);
-            move = false;
+            if (move) {
+                lua.style.transform = 'translateX(-100vw)'
+                gerarAdversario(qtdAdiversarios);
+                move = false;
+            }
+        
+            personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
         }
-    
-        personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
     });
     
     corpo.addEventListener('mouseup', () => {
@@ -48,8 +50,12 @@ function jogo() {
     }
 
     setInterval(() => {
-        if(x) {
+        if(personagem.getBoundingClientRect().top > window.innerHeight) {
             gameOver();
+
+            corpo.addEventListener('click', () => {
+                document.location.reload();
+            });
         }
     }, 500);
 

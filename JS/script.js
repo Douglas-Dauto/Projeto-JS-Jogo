@@ -5,6 +5,8 @@ function jogo() {
     const corpo = document.getElementsByTagName('body')[0];
     const lua = document.getElementById('lua');
     const menu = document.getElementById('menu');
+    const contador = document.querySelector('#contador');
+    let adversarioAtual;
     let qtdAdiversarios = 0;
     let move = true;
     
@@ -15,18 +17,18 @@ function jogo() {
             gerarAdversario(qtdAdiversarios)
         }}, 5000);
     
-    corpo.addEventListener('mousedown', () => {
-        if(personagem.getBoundingClientRect().top < window.innerHeight) {
-            menu.innerHTML = '';
+        corpo.addEventListener('mousedown', () => {
+            if(personagem.getBoundingClientRect().top < window.innerHeight) {
+                menu.innerHTML = '';
 
-            if (move) {
-                lua.style.transform = 'translateX(-100vw)'
-                gerarAdversario(qtdAdiversarios);
-                move = false;
+                if (move) {
+                    lua.style.transform = 'translateX(-100vw)'
+                    gerarAdversario(qtdAdiversarios);
+                    move = false;
+                }
+            
+                personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
             }
-        
-            personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
-        }
     });
     
     corpo.addEventListener('mouseup', () => {
@@ -47,7 +49,15 @@ function jogo() {
             adversarioImg.style.transform = 'translateX(-120vw) rotateY(180deg)';
             qtdAdiversarios++;
         }
+
+        adversarioAtual = adversarioImg;
     }
+
+    setInterval(() => {
+        if(adversarioAtual.getBoundingClientRect().left < 0) {
+            contador.innerHTML = `${qtdAdiversarios}`;
+        }
+    }, 1000);
 
     setInterval(() => {
         if(personagem.getBoundingClientRect().top > window.innerHeight) {

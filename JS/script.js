@@ -9,6 +9,7 @@ function jogo() {
     let adversarioAtual;
     let qtdAdiversarios = 0;
     let move = true;
+    let speed = 20;
     
     menu.innerHTML = '<p>Clique para iniciar!</p>';
 
@@ -46,8 +47,13 @@ function jogo() {
         setTimeout(moverAdversario, 300);
 
         function moverAdversario() {
-            adversarioImg.style.transform = 'translateX(-120vw) rotateY(180deg)';
+            adversarioImg.style.transform = `translateX(-1${speed}vw) rotateY(180deg)`;
             qtdAdiversarios++;
+
+            if(speed >= 99) {
+                return;
+            }
+            speed++
         }
 
         adversarioAtual = adversarioImg;

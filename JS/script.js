@@ -13,28 +13,43 @@ function jogo() {
     
     menu.innerHTML = '<p>Clique para iniciar!</p>';
 
+    function botaoDown() {
+        if(personagem.getBoundingClientRect().top < window.innerHeight) {
+            menu.innerHTML = '';
+
+            if (move) {
+                lua.style.transform = 'translateX(-100vw)'
+                gerarAdversario(qtdAdiversarios);
+                move = false;
+            }
+        
+            personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
+        }
+    }
+
+    function botaoUp() {
+        for(i = 0;i < 150;i++) {
+            personagem.style.transform += 'rotate(0.1deg) translateY(4.5px)'
+        }
+    }
+
     setInterval(() => {
         if(move === false && personagem.getBoundingClientRect().top < window.innerHeight) { 
             gerarAdversario(qtdAdiversarios)
         }}, 5000);
     
-        corpo.addEventListener('mousedown', () => {
-            if(personagem.getBoundingClientRect().top < window.innerHeight) {
-                menu.innerHTML = '';
+    corpo.addEventListener('mousedown', () => botaoDown());
+    corpo.addEventListener('mouseup', () => botaoUp());
 
-                if (move) {
-                    lua.style.transform = 'translateX(-100vw)'
-                    gerarAdversario(qtdAdiversarios);
-                    move = false;
-                }
-            
-                personagem.style.transform = 'rotate(-5deg) translateY(-300px)'
-            }
+    window.document.addEventListener('keydown', (e) => {
+        console.log(e)
+        if(e.key === " ") {
+            botaoDown()
+        }
     });
-    
-    corpo.addEventListener('mouseup', () => {
-        for(i = 0;i < 150;i++) {
-            personagem.style.transform += 'rotate(0.1deg) translateY(4.5px)'
+    window.document.addEventListener('keyup', (e) => {
+        if(e.key === " ") {
+            botaoUp()
         }
     });
 
@@ -71,6 +86,12 @@ function jogo() {
 
             corpo.addEventListener('click', () => {
                 document.location.reload();
+            });
+
+            window.document.addEventListener('keypress', (e) => {
+                if(e.key === " ") {
+                    document.location.reload();
+                }
             });
         }
     }, 500);

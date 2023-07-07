@@ -28,8 +28,11 @@ function jogo() {
     }
 
     function botaoUp() {
-        for(i = 0;i < 150;i++) {
-            personagem.style.transform += 'rotate(0.1deg) translateY(4.5px)'
+        let translate = 4.5;
+
+        for(let i = 0;i < window.innerHeight; i++) {
+            translate++
+            personagem.style.transform = `rotate(0.1deg) translateY(${translate}px)`;
         }
     }
 
@@ -83,21 +86,42 @@ function jogo() {
     setInterval(() => {
         if(personagem.getBoundingClientRect().top > window.innerHeight) {
             gameOver();
-
-            corpo.addEventListener('click', () => {
-                document.location.reload();
-            });
-
-            window.document.addEventListener('keypress', (e) => {
-                if(e.key === " ") {
-                    document.location.reload();
-                }
-            });
         }
     }, 500);
 
     function gameOver() {
         menu.innerHTML = 'Fim de jogo!';
         move = true;
+        window.document.body.style.pointerEvents = 'none';
+        botaoUp();
+
+        setTimeout(() => {
+            corpo.addEventListener('click', () => {
+                document.location.reload();
+            });
+    
+            window.document.addEventListener('keyup', (e) => {
+                if(e.key === " ") {
+                    document.location.reload();
+                }
+            });
+
+            window.document.body.style.pointerEvents = 'all';
+        }, 2000);
     }
+
+    setInterval(() => {
+        const person = personagem.getBoundingClientRect();
+        const adver = adversarioAtual.getBoundingClientRect();
+    
+        var objPerson = {x: person.left, y: person.top, width: person.width, height: person.height}
+        var objAdver = {x: adver.left, y: adver.top, width: adver.width, height: adver.height}
+    
+        if (objPerson.x < objAdver.x + objAdver.width &&
+        objPerson.x + objPerson.width > objAdver.x &&
+        objPerson.y < objAdver.y + objAdver.height &&
+        objPerson.y + objPerson.height > objAdver.y) {
+            gameOver();
+        }
+    }, 100);
 }

@@ -9,6 +9,7 @@ function jogo() {
     let adversarioAtual;
     let qtdAdiversarios = 0;
     let move = true;
+    let moveSpace = false;
     let speed = 20;
     
     menu.innerHTML = '<p>Clique para iniciar!</p>';
@@ -45,13 +46,12 @@ function jogo() {
     corpo.addEventListener('mouseup', () => botaoUp());
 
     window.document.addEventListener('keydown', (e) => {
-        console.log(e)
-        if(e.key === " ") {
+        if(e.key === " " && !moveSpace) {
             botaoDown()
         }
     });
     window.document.addEventListener('keyup', (e) => {
-        if(e.key === " ") {
+        if(e.key === " " && !moveSpace) {
             botaoUp()
         }
     });
@@ -92,6 +92,7 @@ function jogo() {
     function gameOver() {
         menu.innerHTML = 'Fim de jogo!';
         move = true;
+        moveSpace = true;
         window.document.body.style.pointerEvents = 'none';
         botaoUp();
 
